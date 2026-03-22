@@ -13,6 +13,7 @@ $tecnologias = $stmt->fetchAll();
 <html lang="pt-BR">
 <head>
     <?php include 'includes/cab_pdo.php'; ?>
+    <link rel="stylesheet" href="../includes/style.css">
 </head>
 <body>
     <div class="container">

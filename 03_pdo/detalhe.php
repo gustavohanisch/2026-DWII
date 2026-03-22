@@ -29,6 +29,7 @@ $pagina_atual = "catalogo";
 <html lang="pt-BR">
 <head>
    <?php include 'includes/cab_pdo.php'; ?>
+   <link rel="stylesheet" href="../includes/style.css">
 </head>
 <body>
     <div class="container">
@@ -65,6 +66,7 @@ $pagina_atual = "catalogo";
                     </td>
                 </tr>
                 <tr style="background: #f3f4f6;">
+                    <td style="padding: 10px; border: 1px solid #e5e7eb; font-weight: bold;">Cadastrado em</td>
                     <td style="padding: 10px; border: 1px solid #e5e7eb;">
 
                     <?php echo date('22/03/2026 \à\s 17:41', strtotime($tec['criado_em'])); ?>
