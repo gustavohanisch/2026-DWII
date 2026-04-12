@@ -35,33 +35,35 @@ $pagina_atual = '';
 </div>
 
     <?php if ($cadastroOk): ?>
-        <div class="alerta-sucesso">
-            <p style="margin: 0;">✅ Projeto cadastrado com sucesso!</p>
+    <div class="alerta-sucesso" style="background: #dcfce7; border-left: 4px solid #16a34a; padding: 12px; margin-bottom: 16px;">
+        <p style="margin: 0; color: #166534;">✅ Projeto cadastrado com sucesso!</p>
     </div>
-    <?php endif; ?>
+<?php endif; ?>
 
-    <?php if ($editadoOk): ?>
-        <div class="alerta-sucesso">
-            <p style="margin: 0;">✅ Projeto atualizado com sucesso!</p>
+<?php if ($editadoOk): ?>
+    <div class="alerta-sucesso" style="background: #dcfce7; border-left: 4px solid #16a34a; padding: 12px; margin-bottom: 16px;">
+        <p style="margin: 0; color: #166534;">✏️ Projeto atualizado com sucesso!</p>
     </div>
-    <?php endif; ?>
+<?php endif; ?>
 
-    <?php if ($excluidoOk): ?>
-        <div class="alerta-sucesso">
-            <p style="margin: 0;">🗑️ Projeto removido com sucesso!</p>
+<?php if ($excluidoOk): ?>
+    <div class="alerta-sucesso" style="background: #dcfce7; border-left: 4px solid #16a34a; padding: 12px; margin-bottom: 16px;">
+        <p style="margin: 0; color: #166534;">🗑️ Projeto removido com sucesso!</p>
     </div>
-    <?php endif; ?>
+<?php endif; ?>
 
-    <?php if ($erroMsg === 'nao_encontrado'): ?>
-        <div class="alerta-erro">
-            <p style="margin: 0;">⚠️ Projeto não encontrado. Ele pode já ter sido removido.</p>
+<?php if ($erroMsg === 'nao_encontrado'): ?>
+    <div class="alerta-erro" style="background: #fee2e2; border-left: 4px solid #dc2626; padding: 12px; margin-bottom: 16px;">
+        <p style="margin: 0; color: #991b1b;">❌ Projeto não encontrado. Ele pode já ter sido removido.</p>
     </div>
-    <?php elseif ($erroMsg === 'id_invalido'): ?>
-        <div class="alerta-erro">
-            <p style="margin: 0;">⚠️ Requisição inválida.</p>
+<?php elseif ($erroMsg === 'id_invalido'): ?>
+    <div class="alerta-erro" style="background: #fee2e2; border-left: 4px solid #dc2626; padding: 12px; margin-bottom: 16px;">
+        <p style="margin: 0; color: #991b1b;">❌ Requisição inválida.</p>
     </div>
 
-    <?php endif; ?>
+        <?php endif; ?>
+
+    
 
     <?php if (empty($projetos)): ?>
         <div class="card" style="text-align: center; padding: 40px 20px; color: #6b7280;">

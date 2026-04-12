@@ -32,11 +32,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $link_github    = trim($_POST['link_github'] ?? '');
     $ano            = trim($_POST['ano']         ?? date('Y'));
 
+    $anoAtual = date('Y');
 
-    if ($nome === '' || $descricao === '' || $tecnologias === '')
-    {
-        $erro = 'Preencha todos os campos obrigatórios.';
-    }
+    if ($nome === '' || $descricao === '' || $tecnologias === '') {
+    $erro = 'Preencha todos os campos obrigatórios.';
+} elseif (!is_numeric($ano) || $ano < 2000 || $ano > $anoAtual) {
+    $erro = 'O ano deve estar entre 2000 e ' . $anoAtual . '.';
+}
 
     if ($erro === '') {
         $sql = 'UPDATE projetos
