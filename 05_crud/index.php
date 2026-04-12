@@ -3,13 +3,18 @@
 require_once __DIR__ . '/../04_sessoes/includes/auth.php';
 requer_login();
 
+
 require_once __DIR__ . '/includes/conexao.php';
 
 $pdo = conectar();
 $stmt = $pdo->query('SELECT * FROM projetos ORDER BY criado_em DESC');
-$projeto = $stmt->fetchAll();
+$projetos = $stmt->fetchAll();
 
 $cadastroOk = isset($_GET['cadastro']) && $_GET['cadastro'] === 'ok';
+$editadoOk = isset($_GET['editado']) && $_GET['editado'] === 'ok';
+$excluidoOk = isset($_GET['excluido']) && $_GET['excluido'] === 'ok';
+
+$erroMsg    = isset($_GET['erro']) ? $_GET['erro'] : '';
 
 $titulo_pagina = 'Meus Projetos - Portfólio';
 $caminho_raiz = '../';
@@ -24,7 +29,7 @@ $pagina_atual = '';
 
 <div class="container">
 
-<div style="display: flex; justify-content: space-betwenn; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
     <h1 class="titulo-secao" style="margin: 0;">📂 Meus Projetos </h1>
     <a href="cadastrar.php" class="btn-primario">➕ Novo Projeto</a>
 </div>
@@ -33,6 +38,29 @@ $pagina_atual = '';
         <div class="alerta-sucesso">
             <p style="margin: 0;">✅ Projeto cadastrado com sucesso!</p>
     </div>
+    <?php endif; ?>
+
+    <?php if ($editadoOk): ?>
+        <div class="alerta-sucesso">
+            <p style="margin: 0;">✅ Projeto atualizado com sucesso!</p>
+    </div>
+    <?php endif; ?>
+
+    <?php if ($excluidoOk): ?>
+        <div class="alerta-sucesso">
+            <p style="margin: 0;">🗑️ Projeto removido com sucesso!</p>
+    </div>
+    <?php endif; ?>
+
+    <?php if ($erroMsg === 'nao_encontrado'): ?>
+        <div class="alerta-erro">
+            <p style="margin: 0;">⚠️ Projeto não encontrado. Ele pode já ter sido removido.</p>
+    </div>
+    <?php elseif ($erroMsg === 'id_invalido'): ?>
+        <div class="alerta-erro">
+            <p style="margin: 0;">⚠️ Requisição inválida.</p>
+    </div>
+
     <?php endif; ?>
 
     <?php if (empty($projetos)): ?>
@@ -64,12 +92,19 @@ $pagina_atual = '';
         </p>
 
         <?php if ($projeto['link_github']): ?>
-            <a href="<php echo htmlspecialchars
+            <a href="<?php echo htmlspecialchars
             ($projeto['link_github']); ?>"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn-secundario">🔗 Ver no GitHub
+            class="btn-secundario">🔗 Ver no GitHub</a>
         <?php endif; ?>
+
+        <div style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap;">
+            <a href="editar.php?id=<?php echo (int) $projeto['id']; ?>"
+                class="btn-secundario">✏️ Editar</a>
+             <a href="excluir.php?id=<?php echo (int) $projeto['id']; ?>"
+                class="btn-perigo">🗑️ Excluir</a>
+            </div>
         </div>
         <?php endforeach; ?>
         </div>
