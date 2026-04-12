@@ -7,23 +7,32 @@ requer_login();
 require_once __DIR__ . '/includes/conexao.php';
 
 $pdo = conectar();
+$stmtTec = $pdo->query('SELECT DISTINCT tecnologias FROM projetos ORDER BY tecnologias');
+$tecnologiasLista = $stmtTec->fetchAll(PDO::FETCH_COLUMN);
 
 $busca = trim($_GET['busca'] ?? '');
+$tecnologia = trim($_GET['tecnologia'] ?? '');
+
+$sql = 'SELECT * FROM projetos WHERE 1=1';
+$params = [];
 
 if ($busca !== '') {
-    $stmt = $pdo->prepare('
-        SELECT * FROM projetos
-        WHERE nome LIKE :busca
-        ORDER BY criado_em DESC
-    ');
-    $stmt->execute([
-        ':busca' => '%' . $busca . '%'
-    ]);
-} else {
-    $stmt = $pdo->query('SELECT * FROM projetos ORDER BY criado_em DESC');
+    $sql .= ' AND nome LIKE :busca';
+    $params[':busca'] = '%' . $busca . '%';
 }
 
+if ($tecnologia !== '') {
+    $sql .= ' AND tecnologias = :tecnologia';
+    $params[':tecnologia'] = $tecnologia;
+}
+
+$sql .= ' ORDER BY criado_em DESC';
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
+
 $projetos = $stmt->fetchAll();
+
 
 $cadastroOk = isset($_GET['cadastro']) && $_GET['cadastro'] === 'ok';
 $editadoOk = isset($_GET['editado']) && $_GET['editado'] === 'ok';
@@ -56,11 +65,22 @@ $pagina_atual = '';
         class="input-texto"
         style="width: 350px;">
 
+    <select name="tecnologia" class="input-texto" style="width: 220px;">
+    <option value="">Todas as tecnologias</option>
+    <?php foreach ($tecnologiasLista as $tec): ?>
+        <option value="<?php echo htmlspecialchars($tec); ?>"
+            <?php echo $tecnologia === $tec ? 'selected' : ''; ?>>
+            <?php echo htmlspecialchars($tec); ?>
+        </option>
+    <?php endforeach; ?>
+</select>
+
     <button type="submit" class="btn-secundario">🔍 Buscar</button>
 
     <?php if ($busca !== ''): ?>
         <a href="index.php" class="btn-secundario">✖ Limpar</a>
     <?php endif; ?>
+
 </form>
     <a href="cadastrar.php" class="btn-primario">➕ Novo Projeto</a>
 </div>
@@ -133,6 +153,8 @@ $pagina_atual = '';
         <?php endif; ?>
 
         <div style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap;">
+            <a href="detalhe.php?id=<?php echo (int) $projeto['id']; ?>" 
+            class="btn-secundario">👁️ Detalhes</a>
             <a href="editar.php?id=<?php echo (int) $projeto['id']; ?>"
                 class="btn-secundario">✏️ Editar</a>
              <a href="excluir.php?id=<?php echo (int) $projeto['id']; ?>"
