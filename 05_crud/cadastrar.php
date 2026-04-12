@@ -21,13 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $form['descricao']   = trim($_POST['descricao']   ?? '');
     $form['tecnologias'] = trim($_POST['tecnologias'] ?? '');
     $form['link_github'] = trim($_POST['link_github'] ?? '');
-    $form['ano']         = (int) ($_POST['ano']       ?? date('2026'));
+    $form['ano']         = (int) ($_POST['ano']       ?? date('Y'));
 
     if ($form['nome'] === '') {
         $erro = 'O nome do projeto é obrigatório.';
     } elseif ($form['descricao'] === '') {
         $erro = 'A descrição é obrigatória.';
-    } elseif ($form['ano'] < 2000 || $form['ano'] > (int) date ('2026') + 1){
+    } elseif ($form['ano'] < 2000 || $form['ano'] > (int) date ('Y') + 1){
         $erro = 'Ano inválido.';
     }
 
