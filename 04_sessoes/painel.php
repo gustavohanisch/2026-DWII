@@ -11,7 +11,7 @@ $pagina_atual = '';
 <html lang="pt-BR">
 <head>
     <?php require_once __DIR__ . '/../includes/cabecalho.php'; ?>
-    <link rel="stylesheet" href="../includes/style.css">
+
 </head>
 <body>
 
@@ -20,7 +20,11 @@ $pagina_atual = '';
 <div class="alerta-sucesso">
     <h3> ✅ Você está autenticado!</h3>
     <p><strong>Usuário:</strong>
+    <?php echo htmlspecialchars($_SESSION['usuario']); ?>
+</p>
+    <p><strong>Login realizado em:</strong>
     <?php echo htmlspecialchars($_SESSION['logado_em'] ?? '-'); ?>
+    
 </p>
 </div>
 
@@ -28,7 +32,9 @@ $pagina_atual = '';
     <h3> 📊 Painel de controle</h3>
     <p>Este conteúdo só é visível para usuários autenticados.
 </p>
-<p>Nas próximas aulas este painel terá funcionalidades reais (CRUD).</p>
+<a href="../05_crud/index.php" class="btn-primario">
+    📂Gerenciar Projetos
+</a>
 </div>
 
 <p style="margin-top: 24px; text-align: center;">
