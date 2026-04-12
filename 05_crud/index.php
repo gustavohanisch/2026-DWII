@@ -7,7 +7,22 @@ requer_login();
 require_once __DIR__ . '/includes/conexao.php';
 
 $pdo = conectar();
-$stmt = $pdo->query('SELECT * FROM projetos ORDER BY criado_em DESC');
+
+$busca = trim($_GET['busca'] ?? '');
+
+if ($busca !== '') {
+    $stmt = $pdo->prepare('
+        SELECT * FROM projetos
+        WHERE nome LIKE :busca
+        ORDER BY criado_em DESC
+    ');
+    $stmt->execute([
+        ':busca' => '%' . $busca . '%'
+    ]);
+} else {
+    $stmt = $pdo->query('SELECT * FROM projetos ORDER BY criado_em DESC');
+}
+
 $projetos = $stmt->fetchAll();
 
 $cadastroOk = isset($_GET['cadastro']) && $_GET['cadastro'] === 'ok';
@@ -31,6 +46,22 @@ $pagina_atual = '';
 
 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
     <h1 class="titulo-secao" style="margin: 0;">📂 Meus Projetos </h1>
+    <form method="get"
+    style="margin-bottom: 20px; display: flex; justify-content: center; align-items: center; gap: 10px;">
+    
+    <input type="text"
+        name="busca"
+        placeholder="Buscar por nome do projeto..."
+        value="<?php echo htmlspecialchars($busca); ?>"
+        class="input-texto"
+        style="width: 350px;">
+
+    <button type="submit" class="btn-secundario">🔍 Buscar</button>
+
+    <?php if ($busca !== ''): ?>
+        <a href="index.php" class="btn-secundario">✖ Limpar</a>
+    <?php endif; ?>
+</form>
     <a href="cadastrar.php" class="btn-primario">➕ Novo Projeto</a>
 </div>
 
