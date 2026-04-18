@@ -32,7 +32,9 @@
 //   "Notice: session_start(): Session already started"
 // que ocorreria se uma página chamasse session_start() antes
 // de incluir este cabecalho.
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // ── 2. Fallbacks defensivos ──────────────────────────────────
 // isset() verifica se a variável foi definida antes de usá-la.

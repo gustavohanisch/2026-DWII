@@ -30,8 +30,8 @@ $titulo_pagina = 'Portfólio — Gustavo Alves Hanisch';
 // Para personalizar o portfólio: edite APENAS estas variáveis.
 // O HTML abaixo não precisa ser alterado.
 $nome      = 'Gustavo Alves Hanisch';
-$descricao = 'Estudante de Técnico em Informática no IFPR, '
-           . 'apaixonado por desenvolvimento web e tecnologia. '
+$descricao = 'Estudante do curso Técnico em Informática no IFPR, '
+           . 'busco fazer faculdade de alguma engenharia. '
            . 'Este portfólio documenta minha jornada de aprendizado '
            . 'ao longo da disciplina de Desenvolvimento Web II.';
 $email     = '20241ctb0100025@estudantes.ifpr.edu.br';
