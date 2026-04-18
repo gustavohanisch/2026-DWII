@@ -12,7 +12,7 @@ $pagina_atual = '';
 <html lang="pt-BR">
 <head>
     <?php require_once __DIR__ . '/../includes/cabecalho.php'; ?>
-    <link rel="stylesheet" href="../includes/style.css">
+
 </head>
 <body>
 

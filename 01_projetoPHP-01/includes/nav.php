@@ -25,6 +25,22 @@ function menu_class($item, $atual) {
 <a href="<?php echo $caminho_raiz; ?>02_formularios/contato.php"
 <?php echo menu_class("contato", $pagina_atual); ?>>
 📫 Contato
+</a>
+
+<a href="<?php echo $caminho_raiz; ?>03_pdo/index.php"
+<?php echo menu_class("catalogo", $pagina_atual); ?>>
+🗄️ Catálogo
+</a>
+
+<a href="<?php echo $caminho_raiz; ?>04_sessoes/login.php"
+<?php echo menu_class("login", $pagina_atual); ?>>
+🔐 Login
+</a>
+
+<a href="<?php echo $caminho_raiz; ?>05_crud/index.php"
+<?php echo menu_class("cadastro", $pagina_atual); ?>>
+📂 CRUD
+</a>
 
 </a>
 </nav>

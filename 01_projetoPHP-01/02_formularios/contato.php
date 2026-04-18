@@ -31,7 +31,7 @@ if (empty($erros) && $_SERVER['REQUEST_METHOD'] === 'POST') {
 <link rel="stylesheet" href="../includes/style.css">
 </head>
 
-<?php include '../include/cabecalho.php'; ?>
+<?php include '../includes/cabecalho.php'; ?>
 
 
 <div class="container">

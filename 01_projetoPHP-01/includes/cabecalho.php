@@ -7,8 +7,8 @@ if (!isset($caminho_raiz)) $caminho_raiz = "../";
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?php echo htmlspecialchars($titulo_pagina); ?></title>
 
-<link rel="stylesheet" href=<?php echo $caminho_raiz; ?>includes/style.css">
+<link rel="stylesheet" href="../includes/style.css">
 
 <?php
-include __DIR__ . 'nav.php';
+include __DIR__ . '/nav.php';
 ?>

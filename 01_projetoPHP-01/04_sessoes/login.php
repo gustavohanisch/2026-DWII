@@ -1,5 +1,6 @@
 <?php
 session_start();
+date_default_timezone_set('America/Sao_Paulo');
 
 if (isset($_SESSION['usuario'])) {
     header('Location: login.php');
@@ -8,6 +9,7 @@ if (isset($_SESSION['usuario'])) {
 
 $USUARIO_VALIDO = 'admin';
 $SENHA_VALIDA = 'dwii2026';
+
 
 $erro = '';
 $login = '';
@@ -19,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($login === $USUARIO_VALIDO && $senha === $SENHA_VALIDA) {
         session_regenerate_id(true);
         $_SESSION['usuario'] = $login;
-        $_SESSION ['logoado_em'] = date('23/03/2026 \à\s 16:42');
+        $_SESSION ['logado_em'] = date('d/m/Y \à\s H:i:s');
         header('Location: painel.php');
         exit;
     } else {
@@ -36,7 +38,7 @@ $pagina_atual = '';
 <html lang="pt-BR">
 <head>
     <?php require_once __DIR__ . '/../includes/cabecalho.php'; ?>
-    <link rel="stylesheet" href="../includes/style.css">
+
 </head>
 <body>
 
