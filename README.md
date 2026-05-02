@@ -13,7 +13,8 @@ Repositório da disciplina **Desenvolvimento Web II** — 2026
 
 ---
 
-## 📁 Estrutura do Repositório
+
+## 📁 Estrutura de Arquivos
 
 | Pasta | Conteúdo |
 |-------|----------|

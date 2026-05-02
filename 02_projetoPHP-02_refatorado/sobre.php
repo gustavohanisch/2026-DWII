@@ -3,74 +3,68 @@
  * ════════════════════════════════════════════════════════════
  * Disciplina : Desenvolvimento Web II (DWII)
  * Projeto    : Portfólio Pessoal — versão refatorada
- * Arquivo    : sobre.php  (página sobre do portfólio)
+ * Arquivo    : sobre.php  (migrado de 01_php-intro/sobre.php)
  * Autor      : Gustavo Alves Hanisch
  * Data       : 18/04/2026
- * Descrição  : A página Sobre apresenta informações pessoais e acadêmicas do autor do portfólio,
- *              permitindo que o visitante o conheça melhor.
- *              Ela utiliza PHP para definir variáveis como nome e página ativa,
- *              além de incluir arquivos reutilizáveis como cabeçalho e rodapé.
- *              O conteúdo principal mostra uma breve apresentação,
- *              objetivos profissionais e um link para voltar à página inicial.
- *              Seu layout é simples, organizado e mantém o padrão visual de todo o sistema.
-
  * ════════════════════════════════════════════════════════════
- * 
- *
  */
 
-$nome        = 'Gustavo Alves Hanisch';
-$pagina_atual = 'sobre';
-$caminho_raiz = './';
+// session_start() ANTES de qualquer saída HTML.
+// Necessário aqui — cabecalho.php é incluído dentro do <head>,
+// após o início do output HTML, tarde demais para iniciar sessão.
+if (session_status() === PHP_SESSION_NONE) session_start();
+
+// ✅ Ordem padrão: $pagina_atual → $titulo_pagina → $caminho_raiz
+// Sem session_start() — cabecalho.php centraliza.
+// Sem $nome — cabecalho.php fornece o fallback.
+
+$nome="Gustavo";
+
+$pagina_atual  = 'sobre';
+$titulo_pagina = 'Sobre | Portfólio DWII';
+$caminho_raiz  = './';
+
 $formacoes = [
-    [
-        'curso' => 'Técnico em Informática',
-        'instituicao' => 'IFPR - Centro Integrar Ponta Grossa',
-        'periodo' => '2024 - 2026'
-    ],
-    [
-        'curso' => 'Ensino Médio',
-        'instituicao' => 'IFPR',
-        'periodo' => '2024 - 2026'
-    ]
+    "Técnico em Informática — IFPR (em andamento)",
+    "Curso de Desenvolvimento Web (2025)",
+    // ← adicione suas formações aqui
 ];
 ?>
 
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre - <?php echo $nome; ?></title>
-<?php include __DIR__ . '/includes/cabecalho.php'; ?>
+  <!-- ✅ '/../includes/' → '/includes/' -->
+  <?php include __DIR__ . '/includes/cabecalho.php'; ?>
 </head>
+<body>
+  <div class="container">
+    <h1 class="titulo-secao">👤 Sobre mim</h1>
 
-<body style="font-family: Arial, sans-serif; margin: 0; background: #f3f4f6;">
-
-
-
-<div style="max-width: 800px; margin: 40px auto; padding: 0 20px;">
-    <h1 style="color: #3b579d;">👤 Sobre mim</h1>
-    <p>Olá! Sou <strong><?php echo $nome; ?></strong>, estudante de
-    Técnico em Informática no IFPR de Ponta Grossa.</p>
-
-    <p>Quero fazer faculdade de engenharia elétrica ou mecânica e seguir em uma dessas áreas depois de me formar.</p>
-
-    <h2>Formações Acadêmicas</h2>
-
-<?php foreach ($formacoes as $formacao): ?>
-    <div style="margin-bottom: 20px;">
-        <strong><?php echo $formacao['curso']; ?></strong><br>
-        Instituição: <?php echo $formacao['instituicao']; ?><br>
-        Período: <?php echo $formacao['periodo']; ?>
-    </div>
-<?php endforeach; ?>
-
-    <a href="index.php"
-       style="color: #3b579d; font-weight: bold;">← Voltar ao início</a>
+<div class="card">
+  <h3>Quem sou eu</h3>
+  <!-- $nome disponível via fallback do cabecalho.php -->
+  <p>Olá! Sou <strong><?php echo htmlspecialchars($nome); ?></strong>,
+     estudante do 3º ano do Técnico em Informática no IFPR de Ponta Grossa.</p>
 </div>
 
-<?php include __DIR__ . '/includes/rodape.php'; ?>
+<div class="card">
+  <h3>Formação</h3>
+  <ul style="margin: 0; padding-left: 20px; color: #374151;">
+    <?php foreach ($formacoes as $item): ?>
+      <li style="margin-bottom: 6px;"><?php echo htmlspecialchars($item); ?></li>
+    <?php endforeach; ?>
+  </ul>
+</div>
+  </div>
+
+  <!-- ✅ '/../includes/' → '/includes/' -->
+
+  <?php include __DIR__ . '/includes/rodape.php'; ?>
 
 </body>
 </html>
+
+
+

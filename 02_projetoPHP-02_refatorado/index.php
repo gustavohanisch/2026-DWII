@@ -22,8 +22,9 @@ if (session_status() === PHP_SESSION_NONE) {
 //                 './' = estamos na raiz do projeto
 // $titulo_pagina → aparece na aba do navegador
 $pagina_atual  = 'inicio';
+$titulo_pagina = 'Portfólio | DWII 2026';
 $caminho_raiz  = './';
-$titulo_pagina = 'Portfólio — Gustavo Alves Hanisch';
+
 
 // ── Dados de apresentação ────────────────────────────────────
 // Centralizamos o conteúdo em variáveis PHP.
@@ -62,7 +63,7 @@ $email     = '20241ctb0100025@estudantes.ifpr.edu.br';
       <!-- Foto de perfil -->
       <div class="foto-container">
         <img
-          src="<?php echo $caminho_raiz; ?>00_apresentacao/imgs/gustavo.jpg"
+          src="<?php echo $caminho_raiz; ?>02_projetoPHP-02_refatorado/includes/imgs/gustavo.jpg"
           alt="Foto de <?php echo htmlspecialchars($nome); ?>"
           class="foto-perfil">
       </div>
