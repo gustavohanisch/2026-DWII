@@ -1,11 +1,19 @@
 <?php
-
+/**
+ * ════════════════════════════════════════════════════════════
+ * Disciplina : Desenvolvimento Web II (DWII)
+ * Projeto    : Portfólio Pessoal — versão refatorada
+ * Arquivo    : projetos.php
+ * Autor      : Gustavo Alves Hanisch
+ * Data       : 27/04/2026
+ * Descrição  : Lista PÚBLICA de projetos lidos do banco via PDO.
+ *              Adaptada de 05_crud/index.php - sem autenticação
+ *              e sem botões de editar/excluir
+ * ════════════════════════════════════════════════════════════
+ */
 if (session_status() === PHP_SESSION_NONE) session_start();
 
 
-
-
-$nome        = 'Gustavo Alves Hanisch';
 $pagina_atual = 'projetos';
 $titulo_pagina = 'Projetos | Portfólio DWII';
 $caminho_raiz = "./";
