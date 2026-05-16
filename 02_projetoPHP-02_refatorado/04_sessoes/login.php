@@ -42,7 +42,7 @@ $pagina_atual = '';
 </head>
 <body>
 
-<div class="container" style="max-wigth: 420px;">
+<div class="container" style="max-width: 420px;">
     <div class="form-container">
 
     <h1 class="titulo-secao" style="text-align: center;
